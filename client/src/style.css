@@ -1,13 +1,59 @@
+body {
+  padding: 3em;
+  overflow: hidden;
+}
+
 .task-form {
   display: flex;
 }
 
-.tasks-container {
+.todo-list {
+  flex: 1;
+  padding-bottom: 1em;
+  overflow: auto;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.login-form {
+  border-radius: 8px;
+  border: rgba(0, 0, 0, 0.1) solid 2px;
+  padding: 1em;
+}
+
+h3 {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.btn-custom {
+  background-color: #1877f2;
+  border: none;
+  color: #fff;
+  height: 3em;
+  width: 100%;
+}
+
+input {
+  height: 52px;
+  font-size: 18px !important;
+  color: #f2f2f2;
+}
+
+.tasks-app {
+  border: rgba(0, 0, 0, 0.1) solid 2px;
+  border-radius: 8px;
+  margin: 5em;
+  padding-top: 2em;
+}
+
+.tasks-heading {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: pink;
-  height: 100vh;
-  max-width: 700px !important;
+  flex-direction: row;
+}
+
+.error-message {
+  color: red;
 }

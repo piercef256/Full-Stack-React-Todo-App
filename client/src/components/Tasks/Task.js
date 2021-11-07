@@ -2,28 +2,28 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import * as api from "../../api/index.js";
 
-const Task = ({ id = "", deleteTask, updateTask, index }) => {
+const Task = ({ id = "", deleteTask, updateTask, index, token }) => {
   const [editing, setEditing] = useState(false);
   const [taskText, setTaskText] = useState("");
   const [task, setTask] = useState({
     title: "",
   });
 
-  const getTask = async (id) => {
-    const response = await api.getTask(id);
+  const getTask = async (token, id) => {
+    const response = await api.getTask(token, id);
     setTask(response.data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await updateTask(id, { ...task, title: taskText });
-    await getTask(id);
+    await getTask(token, id);
     setEditing(false);
   };
 
   useEffect(() => {
-    getTask(id);
-  }, [id]);
+    getTask(token, id);
+  }, [token, id]);
 
   return (
     <>
