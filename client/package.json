@@ -1,5 +1,4 @@
 {
-  "proxy": "https://todo-api-gateway-2.herokuapp.com",
   "name": "client",
   "version": "0.1.0",
   "private": true,
