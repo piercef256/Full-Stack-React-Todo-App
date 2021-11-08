@@ -2,7 +2,8 @@ express = require("express");
 mongoose = require("mongoose");
 const axios = require("axios");
 
-const TASKS_API_URL = process.env.TASKS_API_URL;
+const TASKS_API_URL =
+  process.env.TASKS_API_URL || "http://localhost:5000/tasks";
 
 // CREATE
 const createTask = async (req, res) => {
@@ -34,7 +35,7 @@ const getTask = async (req, res) => {
   });
 };
 
-// UPDATE
+// UPDATE TITLE
 const updateTask = async (req, res) => {
   await axios
     .put(`${TASKS_API_URL}/${req.params.id}`, req.body)

@@ -63,7 +63,9 @@ const Tasks = ({ token, username }) => {
               }}
               autoComplete="off"
             >
-              <h4 className="mb-5 text-center">Click on a task to edit</h4>
+              <h4 className="mb-5 text-center">
+                Click on a task to cross it out
+              </h4>
               <div className="form-group task-form">
                 <input
                   className="form-control"
@@ -87,6 +89,7 @@ const Tasks = ({ token, username }) => {
                 <li className="todo-list-item list-group-item" key={key}>
                   <Task
                     id={task._id}
+                    finished={task.finished}
                     deleteTask={deleteTask}
                     updateTask={updateTask}
                     index={key}

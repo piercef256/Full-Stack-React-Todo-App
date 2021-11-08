@@ -2,9 +2,12 @@ import axios from "axios";
 
 // in .env: REACT_APP_API_GATEWAY_TASKS_URL="http://localhost:3001/api/tasks"
 // .........REACT_APP_API_GATEWAY_AUTHENTICATION_URL="http://localhost:3001/api/user"
-const API_GATEWAY_TASKS_URL = process.env.REACT_APP_API_GATEWAY_TASKS_URL;
+const API_GATEWAY_TASKS_URL =
+  process.env.REACT_APP_API_GATEWAY_TASKS_URL ||
+  "http://localhost:3001/api/tasks";
 const API_GATEWAY_AUTHENTICATION_URL =
-  process.env.REACT_APP_API_GATEWAY_AUTHENTICATION_URL;
+  process.env.REACT_APP_API_GATEWAY_AUTHENTICATION_URL ||
+  "http://localhost:3001/api/user";
 
 // CREATE
 export function createTask(token, newTask) {
