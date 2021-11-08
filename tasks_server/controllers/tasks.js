@@ -48,12 +48,15 @@ const getTask = async (req, res) => {
 // UPDATE TASK
 const updateTask = async (req, res) => {
   const { id } = req.params;
-  const { title } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No task with id: ${id}`);
 
-  const updatedTask = { title, _id: id };
+  const updatedTask = {
+    title: req.body.title,
+    finished: req.body.finished,
+    _id: id,
+  };
   await Task.findByIdAndUpdate(id, updatedTask, { new: true });
 
   res.json(updatedTask);
