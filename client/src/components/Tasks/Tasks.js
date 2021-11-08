@@ -4,28 +4,34 @@ import * as api from "../../api";
 import "../../style.css";
 import Task from "./Task";
 
-const Tasks = () => {
+const Tasks = ({ token, username }) => {
   const [taskText, setTaskText] = useState("");
   const [tasksData, setTasksData] = useState([{ title: "" }]);
 
   const createTask = async () => {
-    await api.createTask({ title: taskText });
+    await api.createTask(token, { title: taskText });
     getTasks();
   };
 
   const getTasks = async () => {
-    const response = await api.getTasks();
+    const response = await api.getTasks(token);
     setTasksData(response.data);
   };
 
   const updateTask = async (id, newTask) => {
-    await api.updateTask(id, newTask);
+    await api.updateTask(token, id, newTask);
     getTasks();
   };
 
   const deleteTask = async (id) => {
-    await api.deleteTask(id);
+    await api.deleteTask(token, id);
     getTasks();
+  };
+
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    window.location.reload();
   };
 
   const handleSubmit = (e) => {
@@ -36,56 +42,61 @@ const Tasks = () => {
 
   useEffect(() => {
     getTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <h1 className="text-center my-3">To Do App</h1>
-      <h3 className="text-center">Click on task to edit</h3>
-      <div className="todo container">
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-          autoComplete="off"
-        >
-          <div className="form-group task-form">
-            <input
-              className="form-control"
-              type="text"
-              value={taskText}
-              name="text"
-              onChange={(e) => {
-                setTaskText(e.target.value);
-              }}
-              placeholder="Title"
-            />
-
-            <button className="btn btn-primary" type="submit">
-              <span>+</span>
+      <div className="container tasks-container">
+        <div className="row align-items-center justify-content-center vh-100">
+          <div className="tasks-heading col-md-5">
+            <h3>Welcome to your tasks, {username}</h3>
+            <button className="btn btn-success" onClick={logout}>
+              Logout
             </button>
           </div>
-        </form>
-        {/* <button
-          onClick={(e) => {
-            refresh(e);
-          }}
-        >
-          Refresh
-        </button> */}
-        <hr />
-        <ul className="todo-list list-group">
-          {tasksData.map((task, key) => (
-            <li className="todo-list-item list-group-item" key={key}>
-              <Task
-                id={task._id}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                index={key}
-              />
-            </li>
-          ))}
-        </ul>
+
+          <div className="col-md-5 tasks-app">
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+              autoComplete="off"
+            >
+              <h4 className="mb-5 text-center">Click on a task to edit</h4>
+              <div className="form-group task-form">
+                <input
+                  className="form-control"
+                  type="text"
+                  value={taskText}
+                  name="text"
+                  onChange={(e) => {
+                    setTaskText(e.target.value);
+                  }}
+                  placeholder="Title"
+                />
+
+                <button className="btn btn-primary" type="submit">
+                  <span>+</span>
+                </button>
+              </div>
+            </form>
+            <hr />
+            <ul className="todo-list list-group">
+              {tasksData.map((task, key) => (
+                <li className="todo-list-item list-group-item" key={key}>
+                  <Task
+                    id={task._id}
+                    deleteTask={deleteTask}
+                    updateTask={updateTask}
+                    index={key}
+                    token={token}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </>
   );
