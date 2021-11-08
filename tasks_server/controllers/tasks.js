@@ -5,15 +5,15 @@ const Task = require("../models/task.js");
 
 // CREATE
 const createTask = async (req, res) => {
-  const { title } = req.body;
+  const { author, title } = req.body;
 
-  const newTask = new Task({
-    title,
+  const newTask = await Task.create({
+    author: author,
+    title: title,
   });
 
   try {
     await newTask.save();
-
     res.status(201).json(newTask);
   } catch (error) {
     res.status(409).json({ message: error.message });
@@ -22,8 +22,9 @@ const createTask = async (req, res) => {
 
 // READ ALL TASKS
 const getTasks = async (req, res) => {
+  const { id } = req.params;
   try {
-    const tasks = await Task.find({});
+    const tasks = await Task.find({ author: id });
 
     res.status(200).json(tasks);
   } catch (error) {
@@ -67,7 +68,7 @@ const deleteTask = async (req, res) => {
 
   await Task.findByIdAndRemove(id);
 
-  res.json({ message: "Task deleted successfully." });
+  res.status(204).json({ message: "Task deleted successfully." });
 };
 
 module.exports = {
