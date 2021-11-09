@@ -1,7 +1,7 @@
 # todo-app-full-stack
-Live Preview (please allow up to 30 seconds for Heroku to "wake up"): https://todo-frontend2.herokuapp.com/. Login with user: demo123, pass: demo123 if you don't want to make an account.
+Live Preview http://client.eba-mrzjfmt3.us-west-2.elasticbeanstalk.com/. Login with user: demo123, pass: demo123 if you don't want to make an account.
 
-Deployed using Heroku with client, tasks_server, and api_gateway deployed separately.
+Deployed using AWS elastic beanstalk with client, tasks_server, and api_gateway deployed separately.
 The api_gateway handles authentication and protects all routes going to the tasks_server.
 Full stack todo list app built with React, Node, Express, and MongoDB. 
 
