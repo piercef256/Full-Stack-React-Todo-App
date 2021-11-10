@@ -8,4 +8,4 @@ Full stack todo list app built with React, Node, Express, and MongoDB.
 
 ## UML Diagram
 
-![alt text](https://github.com/piercef256/todo-app-full-stack/blob/uml/documentation/uml0.svg?raw=true)
+![alt text](https://github.com/piercef256/todo-app-full-stack/blob/main/documentation/uml0.svg?raw=true)
