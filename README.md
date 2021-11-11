@@ -12,4 +12,4 @@ Full stack todo list app built with React, Node, Express, and MongoDB.
 
 ## Sequence Diagram
 
-![alt text](https://github.com/piercef256/todo-app-full-stack/blob/main/documentation/sequence0.svg?raw=true)
+![alt text](https://github.com/piercef256/todo-app-full-stack/blob/main/documentation/sequence1.svg?raw=true)
