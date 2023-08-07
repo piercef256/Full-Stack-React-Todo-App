@@ -21,10 +21,10 @@ app.use("/api/user", authRoutes);
 app.use("/api/tasks", verifyToken, tasksRoutes);
 app.use("/api/verify", verifyToken);
 
-const DB_CONNECT = process.env.DB_CONNECT;
+const MONGO_URI = process.env.MONGO_URI;
 const PORT = process.env.PORT || 3001;
 mongoose
-  .connect(DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server Running on Port: http://localhost:${PORT}`);

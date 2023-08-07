@@ -2,8 +2,7 @@ express = require("express");
 mongoose = require("mongoose");
 const axios = require("axios");
 
-const TASKS_API_URL =
-  process.env.TASKS_API_URL || "http://localhost:5000/tasks";
+const TASKS_API_URL = process.env.TASKS_API_URL || "http://localhost:5000";
 
 // CREATE
 const createTask = async (req, res) => {
@@ -15,7 +14,7 @@ const createTask = async (req, res) => {
     title: title,
   };
 
-  await axios.post(`${TASKS_API_URL}`, data).then((response) => {
+  await axios.post(`${TASKS_API_URL}/tasks`, data).then((response) => {
     res.status(200).json(response.data);
   });
 };
@@ -23,22 +22,24 @@ const createTask = async (req, res) => {
 // READ ALL
 const getTasks = async (req, res) => {
   const id = req.user._id;
-  await axios.get(`${TASKS_API_URL}/users/${id}`).then((response) => {
+  await axios.get(`${TASKS_API_URL}/tasks/users/${id}`).then((response) => {
     res.json(response.data);
   });
 };
 
 // READ SINGLE
 const getTask = async (req, res) => {
-  await axios.get(`${TASKS_API_URL}/${req.params.id}`).then((response) => {
-    res.json(response.data);
-  });
+  await axios
+    .get(`${TASKS_API_URL}/tasks/${req.params.id}`)
+    .then((response) => {
+      res.json(response.data);
+    });
 };
 
 // UPDATE TITLE
 const updateTask = async (req, res) => {
   await axios
-    .put(`${TASKS_API_URL}/${req.params.id}`, req.body)
+    .put(`${TASKS_API_URL}/tasks/${req.params.id}`, req.body)
     .then((response) => {
       res.json(response.data);
     });
@@ -46,9 +47,11 @@ const updateTask = async (req, res) => {
 
 // DELETE
 const deleteTask = async (req, res) => {
-  await axios.delete(`${TASKS_API_URL}/${req.params.id}`).then((response) => {
-    res.json(response.data);
-  });
+  await axios
+    .delete(`${TASKS_API_URL}/tasks/${req.params.id}`)
+    .then((response) => {
+      res.json(response.data);
+    });
 };
 
 module.exports = {
