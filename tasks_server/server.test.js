@@ -12,10 +12,9 @@ beforeEach((done) => {
   mongoose.connect(MONGO_URI_TESTING, { useNewUrlParser: true }, () => done());
 });
 
-afterEach((done) => {
-  mongoose.connection.db.dropDatabase(() => {
-    mongoose.connection.close(() => done());
-  });
+afterEach(async () => {
+  await mongoose.connection.db.dropDatabase();
+  await mongoose.connection.close();
 });
 
 // CREATE TASK ... router.post("/", createTask);
